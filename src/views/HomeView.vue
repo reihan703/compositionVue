@@ -15,21 +15,31 @@
       <p>{{dataTwo.age}} - {{dataTwo.name}} - {{nameTwo}}</p>
       <a @click="updateDataTwo" class="btn btn-primary" href="#" role="button">Update</a> -->
 
-      <h3>Names</h3>
+      <!-- <h3>Names</h3>
       <h5>search: </h5>
       <input type="text" v-model="search" class="form-control my-3 mx-auto w-50" id="exampleInputEmail1" aria-describedby="emailHelp">
       <div v-for="name in nameMatch" :key="name">
         {{name}}
       </div>
-      <a name="" id="" @click="handleClick" class="btn btn-primary" href="#" role="button">stop</a>
-		</div>
+      <a name="" id="" @click="handleClick" class="btn btn-primary" href="#" role="button">stop</a> -->
+      <div v-if="error" class="error">
+        {{error}}
+      </div>
+      <div v-if="posts.length" class="posts">
+        <PostsList  :posts="posts" />
+        <a class="btn btn-primary btn-sm " @click="posts.pop()" href="#" role="button">Delete </a>
+      </div>
+      
+    </div>
 	</div>
 </template>
 
 <script>
 import { computed, reactive, ref, watch, watchEffect } from 'vue'
+import PostsList from '../components/PostsList.vue'
 
 export default {
+  components: { PostsList },
   name:'home',
   setup(){
     // const data = ref({age: 30, name:'Lola'})
@@ -57,6 +67,9 @@ export default {
     // }
 
     // return{dataTwo,dataOne, nameTwo, updateDataOne, updateDataTwo}
+    const posts = ref([])
+    const error = ref(null)
+    
     const search = ref('')
     const names = ref(['budi','sumanto','anto','rosa'])
 
@@ -77,7 +90,21 @@ export default {
       stopEffect()
     }
 
-    return{names, nameMatch, search, stopWatch, stopEffect, handleClick}
+    const load = async ()=>{
+      try{
+        let data = await fetch('http://localhost:3000/posts')
+        if (!data.ok){
+          throw Error('no data')
+        }
+        posts.value = await data.json()
+      }catch(err){
+        error.value=err.message
+      }
+    } 
+    
+    load()
+
+    return{names, nameMatch, search, stopWatch, stopEffect, handleClick, posts, error}
   }
 }
 </script>
