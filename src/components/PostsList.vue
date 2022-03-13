@@ -1,5 +1,5 @@
 <template>
-  <div v-for="post in posts" :key="post.id">
+  <div class="card mb-2 w-50 mx-auto" v-for="post in posts" :key="post.id">
     <!-- <h3>{{post.title}}</h3> -->
     <SinglePost :post='post'/>
   </div>

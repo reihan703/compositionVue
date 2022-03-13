@@ -2,6 +2,7 @@
 	<div class="home">
     
 		<div class="container-fluid d-flex flex-column mx-auto my-auto">
+      <h1>Home</h1>
 			<!-- <p>my name is {{data.name}} and i am {{data.age}} years old</p>
 			<input type="text" v-model="data.age" class="form-control my-3" id="exampleInputEmail1" aria-describedby="emailHelp">
       <a name="" id="" @click="clickBtn" class="btn btn-primary" href="#" role="button">Click here</a>
@@ -29,7 +30,9 @@
         <PostsList  :posts="posts" />
         <a class="btn btn-primary btn-sm " @click="posts.pop()" href="#" role="button">Delete </a>
       </div>
-      
+      <div v-else class="loading">
+        <h5>Loading....</h5>
+      </div>
     </div>
 	</div>
 </template>
@@ -37,6 +40,7 @@
 <script>
 import { computed, reactive, ref, watch, watchEffect } from 'vue'
 import PostsList from '../components/PostsList.vue'
+import getPosts from '../composables/getPosts'
 
 export default {
   components: { PostsList },
@@ -67,8 +71,8 @@ export default {
     // }
 
     // return{dataTwo,dataOne, nameTwo, updateDataOne, updateDataTwo}
-    const posts = ref([])
-    const error = ref(null)
+    // const posts = ref([])
+    // const error = ref(null)
     
     const search = ref('')
     const names = ref(['budi','sumanto','anto','rosa'])
@@ -90,18 +94,21 @@ export default {
       stopEffect()
     }
 
-    const load = async ()=>{
-      try{
-        let data = await fetch('http://localhost:3000/posts')
-        if (!data.ok){
-          throw Error('no data')
-        }
-        posts.value = await data.json()
-      }catch(err){
-        error.value=err.message
-      }
-    } 
+    // const load = async ()=>{
+    //   try{
+    //     let data = await fetch('http://localhost:3000/posts')
+    //     if (!data.ok){
+    //       throw Error('no data')
+    //     }
+    //     posts.value = await data.json()
+    //   }catch(err){
+    //     error.value=err.message
+    //   }
+    // } 
     
+    // load()
+
+    const {posts, load, error} = getPosts()
     load()
 
     return{names, nameMatch, search, stopWatch, stopEffect, handleClick, posts, error}
