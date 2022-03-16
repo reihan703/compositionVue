@@ -21,12 +21,15 @@
 
 <script>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 export default {
   setup(){
     const title = ref('')
     const body = ref('')
     const tags = ref([])
     const tag = ref('')
+
+    const router = useRouter()
     
 
     const keyEvent=()=>{
@@ -50,9 +53,7 @@ export default {
         body: JSON.stringify(post)
       })
 
-      title.value=''
-      body.value=''
-      tags.value=''
+      router.push({name:'home'})
     }
 
     return{title, body, tag, tags, keyEvent, submitEvent}

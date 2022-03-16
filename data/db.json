@@ -21,13 +21,16 @@
       ]
     },
     {
-      "title": "adsf",
-      "body": "asdfasdf",
-      "tags": [
-        "adsdfd",
-        "gggg"
-      ],
-      "id": 3
-    }
+			"title": "adsf",
+			"body": "asdfasdf",
+			"tags": ["abc", "def", "ghi"],
+			"id": 3
+		},
+    {
+			"title": "gsdfgsfd",
+			"body": "gdfsgdfsg",
+			"tags": ["abc1", "def2", "ghi3"],
+			"id": 4
+		}
   ]
 }

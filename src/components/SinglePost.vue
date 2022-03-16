@@ -3,10 +3,11 @@
     <router-link :to="{name: 'details', params: {id2:post.id}}">
       <h3>{{post.title}}</h3>
     </router-link>
-    
     <p>{{snippet}}</p>
     <span v-for="tag in post.tags" :key="tag">
-      #{{tag}}
+      <router-link :to="{name:'tags', params: {tag:tag}}">
+        #{{tag}}
+      </router-link>
     </span>
   </div>
 </template>
