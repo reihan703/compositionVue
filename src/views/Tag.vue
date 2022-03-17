@@ -4,6 +4,7 @@
   </div>
   <div v-if="tags.length" class="tags mt-3">
     <PostsList  :posts="tags" />
+    <TagCloud :posts="posts"/>
   </div>
   <div v-else class="loading">
     <Spinner/>
@@ -13,12 +14,13 @@
 <script>
 import Spinner from '../components/Spinner.vue'
 import PostsList from '../components/PostsList.vue'
+import TagCloud from '../components/TagCloud.vue'
 import getPosts from '../composables/getPosts'
 import { useRoute } from 'vue-router'
 import {computed} from 'vue'
 
 export default {
-  components: { PostsList, Spinner },
+  components: { PostsList, Spinner, TagCloud, },
   setup(){
     const route = useRoute()
 

@@ -29,6 +29,7 @@
       <div v-if="posts.length" class="posts">
         <PostsList  :posts="posts" />
         <a class="btn btn-primary btn-sm " @click="posts.pop()" href="#" role="button">Delete </a>
+        <TagCloud :posts="posts"/>
       </div>
       <div v-else class="loading">
         <Spinner/>
@@ -40,11 +41,12 @@
 <script>
 import { computed, reactive, ref, watch, watchEffect } from 'vue'
 import PostsList from '../components/PostsList.vue'
+import TagCloud from '../components/TagCloud.vue'
 import Spinner from '../components/Spinner.vue'
 import getPosts from '../composables/getPosts'
 
 export default {
-  components: { PostsList, Spinner },
+  components: { PostsList, Spinner, TagCloud },
   name:'home',
   setup(){
     // const data = ref({age: 30, name:'Lola'})
