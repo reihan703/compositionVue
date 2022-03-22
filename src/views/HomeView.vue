@@ -28,7 +28,7 @@
       </div>
       <div v-if="posts.length" class="posts">
         <PostsList  :posts="posts" />
-        <a class="btn btn-primary btn-sm " @click="posts.pop()" href="#" role="button">Delete </a>
+        <!-- <a class="btn btn-primary btn-sm " @click="posts.pop()" href="#" role="button">Delete </a> -->
         <TagCloud :posts="posts"/>
       </div>
       <div v-else class="loading">

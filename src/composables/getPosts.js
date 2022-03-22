@@ -17,7 +17,9 @@ const getPosts = () => {
 			// }
 			// posts.value = await data.json();
 
-			const res = await projectFireStore.collection('post').get()
+			const res = await projectFireStore.collection('post')
+			.orderBy('created', 'desc')
+			.get()
 			posts.value = res.docs.map(doc=>{
 				return {...doc.data(),id:doc.id}
 			})
